@@ -50,6 +50,11 @@ final class PigManureExtendedEntityProperties implements IExtendedEntityProperti
         this.ResetTicksLeft();
     }
 
+    public Random GetRandom()
+    {
+        return this.random;
+    }
+
     public boolean DecrementTicksLeft()
     {
         if (--this.ticksLeft <= 0)

@@ -1,5 +1,7 @@
 package airbreather.mods.pigmanure;
 
+import java.util.Random;
+
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -50,6 +52,12 @@ final class PigUpdateEventHandler implements IEventListener
 
         if (pmeep.DecrementTicksLeft())
         {
+            Random rand = pmeep.GetRandom();
+            float firstValue = rand.nextFloat();
+            float secondValue = rand.nextFloat();
+            float pitch = firstValue - secondValue * 0.2F + 1.0F;
+
+            typedEntity.playSound("mob.chicken.plop", 1.0F, pitch);
             final Item itemToDrop = this.itemRegistry.FetchItem(PigManureConstants.ManureItemDefinition);
             typedEvent.entity.dropItem(itemToDrop, 1);
         }
