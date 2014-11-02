@@ -1,0 +1,11 @@
+[{
+    "modid": "PigManure",
+    "name": "Pig Manure",
+    "description": "Adding manure, from pigs.",
+    "version": "${mod_version}",
+    "mcversion": "${minecraft_version}-${forge_version}",
+    "url": "https://github.com/airbreather/pig-manure-mod",
+    "authorList": [ "airbreather", "skidznet" ],
+    "credits": "skidznet, for the icons",
+    "dependencies": []
+}]

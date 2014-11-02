@@ -1,0 +1,51 @@
+package airbreather.mods.pigmanure;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
+import airbreather.mods.airbreathercore.mod.IModLifecycleManager;
+import airbreather.mods.airbreathercore.mod.IModule;
+import airbreather.mods.airbreathercore.mod.ModLifecycleManager;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
+@Mod(modid = PigManureConstants.ModID, name = PigManureConstants.ModName)
+public final class PigManureMod
+{
+    private final IModLifecycleManager modLifecycleManager;
+
+    public PigManureMod(final IModLifecycleManager modLifecycleManager)
+    {
+        this.modLifecycleManager = checkNotNull(modLifecycleManager, "modLifecycleManager");
+    }
+
+    // Either a parameterless constructor or a parameterless static factory
+    // method is required for FML to load us.
+    @Mod.InstanceFactory
+    private static PigManureMod CreateInstance()
+    {
+        IModule module = new PigManureModule();
+        IModLifecycleManager modLifecycleManager = new ModLifecycleManager(module);
+        return new PigManureMod(modLifecycleManager);
+    }
+
+    @Mod.EventHandler
+    private void PreInit(FMLPreInitializationEvent event)
+    {
+        this.modLifecycleManager.OnPreInit(event);
+    }
+
+    @Mod.EventHandler
+    private void Init(FMLInitializationEvent event)
+    {
+        this.modLifecycleManager.OnInit(event);
+    }
+
+    @Mod.EventHandler
+    private void PostInit(FMLPostInitializationEvent event)
+    {
+        this.modLifecycleManager.OnPostInit(event);
+    }
+}
