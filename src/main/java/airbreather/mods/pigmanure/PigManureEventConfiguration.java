@@ -2,7 +2,7 @@ package airbreather.mods.pigmanure;
 
 import com.google.common.collect.ImmutableList;
 
-import cpw.mods.fml.common.eventhandler.IEventListener;
+import net.minecraftforge.fml.common.eventhandler.IEventListener;
 
 import airbreather.mods.airbreathercore.event.EventConfiguration;
 import airbreather.mods.airbreathercore.event.EventType;

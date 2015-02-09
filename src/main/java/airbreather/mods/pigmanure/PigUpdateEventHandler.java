@@ -4,10 +4,10 @@ import java.util.Random;
 
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.IEventListener;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.IEventListener;
 
 import airbreather.mods.airbreathercore.item.ItemRegistry;
 

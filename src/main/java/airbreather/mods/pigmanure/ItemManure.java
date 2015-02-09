@@ -4,23 +4,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 final class ItemManure extends Item
 {
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
+        // can this player edit this block?
+        if (!playerIn.func_175151_a(pos.offset(side), side, stack))
         {
             return false;
         }
 
-        if (ItemDye.applyBonemeal(par1ItemStack, par3World, par4, par5, par6, par2EntityPlayer))
+        if (ItemDye.applyBonemeal(stack, worldIn, pos, playerIn))
         {
-            if (!par3World.isRemote)
+            if (!worldIn.isRemote)
             {
-                par3World.playAuxSFX(2005, par4, par5, par6, 0);
+                worldIn.playAuxSFX(2005, pos, 0);
             }
 
             return true;
