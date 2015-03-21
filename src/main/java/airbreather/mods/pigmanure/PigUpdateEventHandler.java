@@ -32,6 +32,11 @@ final class PigUpdateEventHandler implements IEventListener
                       event.getClass());
         LivingUpdateEvent typedEvent = (LivingUpdateEvent)event;
 
+        if (typedEvent.entity.worldObj.isRemote)
+        {
+            return;
+        }
+
         if (!(typedEvent.entity instanceof EntityPig))
         {
             return;
