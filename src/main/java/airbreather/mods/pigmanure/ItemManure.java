@@ -13,8 +13,7 @@ final class ItemManure extends Item
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-        // can this player edit this block?
-        if (!playerIn.func_175151_a(pos.offset(side), side, stack))
+        if (!playerIn.canPlayerEdit(pos.offset(side), side, stack))
         {
             return false;
         }
