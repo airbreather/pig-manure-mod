@@ -23,17 +23,8 @@ final class AttachCapabilitiesEventHandler
             return;
         }
 
-        EntityPig typedEntity = (EntityPig)entity;
-
-        if (typedEntity.isChild())
-        {
-            // OK yes, I get it, children do in fact poop.
-            // This is more a practical / balance consideration than a realism thing.
-            return;
-        }
-
         PigManureTicks pmeep = new PigManureTicks();
-        pmeep.init(event.getEntity());
+        pmeep.init(entity);
         event.addCapability(PigManureConstants.PigManureTicksIdentifier, pmeep);
     }
 }
