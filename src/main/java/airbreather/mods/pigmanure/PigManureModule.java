@@ -19,9 +19,7 @@ final class PigManureModule extends ModuleBase
         ItemRegistry itemRegistry = this.GetItemRegistry();
 
         PigUpdateEventHandler pigUpdateHandler = new PigUpdateEventHandler(itemRegistry);
-        PigConstructingEventHandler pigConstructingHandler = new PigConstructingEventHandler();
-        PigManureEventConfiguration eventConfiguration = new PigManureEventConfiguration(pigUpdateHandler,
-                                                                                         pigConstructingHandler);
+        PigManureEventConfiguration eventConfiguration = new PigManureEventConfiguration(pigUpdateHandler);
 
         this.customConfiguration = new PigManureConfigurationAdapter(itemConfiguration,
                                                                      recipeConfiguration,

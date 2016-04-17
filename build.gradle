@@ -35,9 +35,9 @@ archivesBaseName = 'pig-manure'
 version = config.mod_version
 group = 'airbreather.mods.pigmanure'
 
-minecraft.version = config.minecraft_version + '-' + config.forge_version
+minecraft.version = config.minecraft_version + '-' + config.forge_version + '-' + config.minecraft_version
 minecraft.runDir = 'eclipse'
-minecraft.mappings = 'stable_20'
+minecraft.mappings = 'snapshot_20160312'
 minecraft.makeObfSourceJar = false
 
 processResources

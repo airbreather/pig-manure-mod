@@ -9,19 +9,16 @@ import airbreather.mods.airbreathercore.event.EventType;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-// Holds event-related configuration information, specific to YAFM.
+// Holds event-related configuration information, specific to Pig Manure.
 final class PigManureEventConfiguration implements EventConfiguration
 {
     private final PigUpdateEventHandler pigUpdateHandler;
-    private final PigConstructingEventHandler pigConstructingHandler;
 
     private boolean enableManureDrops = false;
 
-    public PigManureEventConfiguration(PigUpdateEventHandler pigUpdateHandler,
-                                       PigConstructingEventHandler pigConstructingHandler)
+    public PigManureEventConfiguration(PigUpdateEventHandler pigUpdateHandler)
     {
         this.pigUpdateHandler = checkNotNull(pigUpdateHandler, "pigUpdateHandler");
-        this.pigConstructingHandler = checkNotNull(pigConstructingHandler, "pigConstructingHandler");
     }
 
     public void EnableManureDrops()
@@ -32,7 +29,7 @@ final class PigManureEventConfiguration implements EventConfiguration
     @Override
     public Iterable<EventType> GetRecognizedEventTypes()
     {
-        return ImmutableList.of(EventType.LivingUpdate, EventType.EntityConstructing);
+        return ImmutableList.of(EventType.LivingUpdate);
     }
 
     @Override
@@ -42,9 +39,6 @@ final class PigManureEventConfiguration implements EventConfiguration
         {
             case LivingUpdate:
                 return this.GetLivingUpdateEventHandlers();
-
-            case EntityConstructing:
-                return this.GetEntityConstructingEventHandlers();
 
             default:
                 return ImmutableList.of();
@@ -58,18 +52,6 @@ final class PigManureEventConfiguration implements EventConfiguration
         if (this.enableManureDrops)
         {
             resultBuilder.add(this.pigUpdateHandler);
-        }
-
-        return resultBuilder.build();
-    }
-
-    private Iterable<IEventListener> GetEntityConstructingEventHandlers()
-    {
-        ImmutableList.Builder<IEventListener> resultBuilder = ImmutableList.builder();
-
-        if (this.enableManureDrops)
-        {
-            resultBuilder.add(this.pigConstructingHandler);
         }
 
         return resultBuilder.build();

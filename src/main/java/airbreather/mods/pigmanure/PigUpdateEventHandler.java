@@ -2,12 +2,15 @@ package airbreather.mods.pigmanure;
 
 import java.util.Random;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.IExtendedEntityProperties;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraft.init.SoundEvents
+
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.IEventListener;
+
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import airbreather.mods.airbreathercore.item.ItemRegistry;
 
@@ -32,17 +35,18 @@ final class PigUpdateEventHandler implements IEventListener
                       event.getClass());
         LivingUpdateEvent typedEvent = (LivingUpdateEvent)event;
 
-        if (typedEvent.entity.worldObj.isRemote)
+        Entity entity = typedEvent.getEntity();
+        if (entity.worldObj.isRemote)
         {
             return;
         }
 
-        if (!(typedEvent.entity instanceof EntityPig))
+        if (!(entity instanceof EntityPig))
         {
             return;
         }
 
-        EntityPig typedEntity = (EntityPig)typedEvent.entity;
+        EntityPig typedEntity = (EntityPig)entity;
 
         if (typedEntity.isChild())
         {
@@ -51,20 +55,18 @@ final class PigUpdateEventHandler implements IEventListener
             return;
         }
 
-        IExtendedEntityProperties eep =
-                typedEntity.getExtendedProperties(PigManureConstants.ExtendedPigPropertiesIdentifier);
-        PigManureExtendedEntityProperties pmeep = (PigManureExtendedEntityProperties)eep;
+        IPigManureTicks eep = typedEntity.getCapability(PigManureConstants.PigManureTicksCapability, null);
 
-        if (pmeep.DecrementTicksLeft())
+        if (eep.DecrementTicksLeft())
         {
-            Random rand = pmeep.GetRandom();
+            Random rand = eep.GetRandom();
             float firstValue = rand.nextFloat();
             float secondValue = rand.nextFloat();
             float pitch = firstValue - secondValue * 0.2F + 1.0F;
 
-            typedEntity.playSound("mob.chicken.plop", 1.0F, pitch);
+            typedEntity.playSound(SoundEvents.entity_chicken_egg, 1.0F, pitch);
             final Item itemToDrop = this.itemRegistry.FetchItem(PigManureConstants.ManureItemDefinition);
-            typedEvent.entity.dropItem(itemToDrop, 1);
+            typedEntity.dropItem(itemToDrop, 1);
         }
     }
 }
