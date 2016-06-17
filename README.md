@@ -4,7 +4,7 @@ Pig Manure mod for Minecraft.
 Makes adult pigs drop manure.  Manure can be used like bonemeal,
 can dye things brown, and can be used as a building material.
 
-Tested with Minecraft Forge version 12.16.0.1865
+Tested with Minecraft Forge version 12.17.0.1965
 
 ## Compiling
 I don't like Eclipse, so here's a step-by-step for how to build this by hand.

@@ -64,7 +64,7 @@ final class PigUpdateEventHandler implements IEventListener
             float secondValue = rand.nextFloat();
             float pitch = firstValue - secondValue * 0.2F + 1.0F;
 
-            typedEntity.playSound(SoundEvents.entity_chicken_egg, 1.0F, pitch);
+            typedEntity.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, pitch);
             final Item itemToDrop = this.itemRegistry.FetchItem(PigManureConstants.ManureItemDefinition);
             typedEntity.dropItem(itemToDrop, 1);
         }

@@ -60,8 +60,13 @@ final class PigManureTicks implements IPigManureTicks
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, EnumFacing facing)
     {
+        // re: the suppression... we've done all we can.  erasure puts us at the
+        // mercy of whatever @CapabilityInject does, and it also prevents us
+        // from being able to do fail-fast at this point.  pre-erasure, we're
+        // golden -- PMC.PMTC is typed as Capability<IPigManureTicks>.
         return capability == PigManureConstants.PigManureTicksCapability ? (T)this : null;
     }
 
