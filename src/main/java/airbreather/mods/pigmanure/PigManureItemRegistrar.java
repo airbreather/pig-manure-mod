@@ -4,9 +4,11 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.init.Bootstrap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -31,16 +33,16 @@ final class PigManureItemRegistrar extends ItemRegistrarBase
             manureItem.setCreativeTab(CreativeTabs.MISC);
 
             // don't blame me; this is what net.minecraft.init.Bootstrap does.
-            BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(manureItem, new BehaviorDefaultDispenseItem()
+            BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(manureItem, new Bootstrap.BehaviorDispenseOptional()
             {
-                private boolean succeeded = true;
                 /**
                  * Dispense the specified stack, play the dispense sound and spawn particles.
                  */
                 protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
                 {
+                    this.field_190911_b = true;
                     World world = source.getWorld();
-                    BlockPos blockpos = source.getBlockPos().offset(BlockDispenser.getFacing(source.getBlockMetadata()));
+                    BlockPos blockpos = source.getBlockPos().offset((EnumFacing)source.getBlockState().getValue(BlockDispenser.FACING));
 
                     if (ItemDye.applyBonemeal(stack, world, blockpos))
                     {
@@ -51,24 +53,10 @@ final class PigManureItemRegistrar extends ItemRegistrarBase
                     }
                     else
                     {
-                        this.succeeded = false;
+                        this.field_190911_b = false;
                     }
 
                     return stack;
-                }
-                /**
-                 * Play the dispense sound from the specified block.
-                 */
-                protected void playDispenseSound(IBlockSource source)
-                {
-                    if (this.succeeded)
-                    {
-                        source.getWorld().playEvent(1000, source.getBlockPos(), 0);
-                    }
-                    else
-                    {
-                        source.getWorld().playEvent(1001, source.getBlockPos(), 0);
-                    }
                 }
             });
 
