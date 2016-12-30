@@ -11,7 +11,7 @@ import airbreather.mods.airbreathercore.item.ItemDefinition;
 final class PigManureConstants
 {
     // ID of the mod.
-    public static final String ModID = "PigManure";
+    public static final String ModID = "pigmanure";
 
     // ID of the base game.
     public static final String BaseGameModID = "minecraft";

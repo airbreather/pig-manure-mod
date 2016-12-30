@@ -14,10 +14,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 final class AttachCapabilitiesEventHandler
 {
     @SubscribeEvent
-    public void invoke(AttachCapabilitiesEvent.Entity event)
+    public void invoke(AttachCapabilitiesEvent<Entity> event)
     {
         checkNotNull(event, "event");
-        Entity entity = event.getEntity();
+        Entity entity = event.getObject();
         if (!(entity instanceof EntityPig))
         {
             return;
